@@ -2,11 +2,21 @@ package helper
 
 import (
 	"fmt"
+	"runtime"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
+
+func TestSkip(t *testing.T) {
+	if runtime.GOOS == "linux" {
+		t.Skip("Can not run on Linux")
+	}
+
+	result := HelloWorld("Ucup")
+	require.Equal(t, "Hello Ucup", result, "Result must be 'Hello Ucup'")
+}
 
 func TestHelloWorldRequire(t *testing.T) {
 	result := HelloWorld("Ucup")
